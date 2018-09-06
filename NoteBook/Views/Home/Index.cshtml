@@ -1,39 +1,11 @@
-﻿@{
+﻿@using NoteBook.Helpers
+@model List<Note>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="Nothing">
-    <h1>There`s nothing here righ now, but we should start somewhere!</h1>
-</div>
+@Html.ShowNotes(Model);
+
+<button class="btn btn-lg btn-add center-block">+</button>
+
 @{await Html.RenderPartialAsync("_EditNote");}
-<div class="row">
-    <div class="col-md-4">
-        <div class="note" data-toggle="modal" data-target="#test1">sadsadsaddfsfdsfdsf dsfdsfdsfdsfds fdsfdsfdsfdsfdsf dsfsffsaf dsf fdsfdfsdfdsf dfsdfdfdsfd</div>
-
-    </div>
-    <div class="col-md-4">
-        <div class="note">sadsadsaddfsfdsfdsf dsfdsfdsfdsfds fdsfdsfdsfdsfdsf dsfsffsaf dsf fdsfdfsdfdsf dfsdfdfdsfd</div>
-
-    </div>
-    <div class="col-md-4"><div class="note">sadsadsaddfsfdsfdsf dsfdsfdsfdsfds fdsfdsfdsfdsfdsf dsfsffsaf dsf fdsfdfsdfdsf dfsdfdfdsfd</div></div>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <div class="note">sadsadsaddfsfdsfdsf dsfdsfdsfdsfds fdsfdsfdsfdsfdsf dsfsffsaf dsf fdsfdfsdfdsf dfsdfdfdsfd</div>
-    </div>
-    <div class="col-md-4">
-        <div class="note">sadsadsaddfsfdsfdsf dsfdsfdsfdsfds fdsfdsfdsfdsfdsf dsfsffsaf dsf fdsfdfsdfdsf dfsdfdfdsfd</div>
-    </div>
-    <div class="col-md-4">
-        <div class="note">sadsadsaddfsfdsfdsf dsfdsfdsfdsfds fdsfdsfdsfdsfdsf dsfsffsaf dsf fdsfdfsddfgfdgfdgfgdfgfdsf dfgdfgdfgdfgdf fdgdfgdfgdfsdfdfdsfd</div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <div class="note">sadsadsaddfsfdsfdsf dsfdsfdsfdsfds fdsfdsfdsfdsfdsf dsfsffsaf dsf fdsfdfsdfdsf dfsdfdfdsfd</div>
-    </div>
-    <div class="col-md-4">
-        <button class="btn btn-lg btn-add center-block">+</button>
-    </div>
-
-</div>
