@@ -1,0 +1,59 @@
+﻿<div class="modal fade" id="test1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2>Let`s edit our note</h2>
+            </div>
+
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="option">Background color:</div>
+                            <div id="colorpicker"></div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <textarea class="note" id="textarea"> dfsf dsf dsfdsf </textarea>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <input type="button" class="form-control btn btn-danger" data-toggle="modal" data-target="#test2" data-dismiss="modal" value="Delete"/>
+
+                        </div>
+
+                        <div class="col-md-offset-4">
+                            <input type="button" class="form-control btn btn-success" value="Edit" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="test2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Are you sure you wan`t to delete the note?</h2>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="form-control btn btn-danger" value="Yes" data-dismiss="modal" /> <br />
+                <input type="button" class="form-control btn btn-success" data-toggle="modal" data-target="#test1" data-dismiss="modal" value="No" />
+            </div>
+        </div>
+    </div>
+</div>
