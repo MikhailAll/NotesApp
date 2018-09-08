@@ -27,10 +27,23 @@ namespace NoteBook.Controllers
         public IActionResult Index()
         {
             var currentUserId = _userManager.GetUserId(HttpContext.User);
-            var currentUserNotes = _context.Users.Where(notes => notes.Id == currentUserId);
-            return View(currentUserNotes);
+            var currentUserNotes = _context.Notes.Where(u => u.UserId == currentUserId);
+            return View(currentUserNotes as List<Note>);
         }
 
+        [HttpPost]
+        public IActionResult AddNote(Note note)
+        {
+            if (note!=null)
+            {
+                var currentUserId = _userManager.GetUserId(HttpContext.User);
+                note.UserId = currentUserId;
+                _context.Notes.Add(note);
+                _context.SaveChanges();
+                return View("Index");
+            }
+            return StatusCode(403);
+        }
         [HttpGet]
         public IActionResult About()
         {
