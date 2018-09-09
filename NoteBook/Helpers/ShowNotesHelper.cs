@@ -10,7 +10,7 @@ namespace NoteBook.Helpers
 {
     public static class ShowNotesHelper
     {
-        public static HtmlString ShowNotes(this IHtmlHelper html, List<Note> NotesList)
+        public static HtmlString ShowNotes(this IHtmlHelper html, IEnumerable<Note> NotesList)
         {
             if (NotesList != null && !NotesList.Any())
             {

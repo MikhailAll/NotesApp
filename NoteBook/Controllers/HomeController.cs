@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using NoteBook.Data;
 using NoteBook.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace NoteBook.Controllers
 {
@@ -24,20 +25,20 @@ namespace NoteBook.Controllers
 
         [HttpGet]
         [Authorize]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var currentUserId = _userManager.GetUserId(HttpContext.User);
-            var currentUserNotes = _context.Notes.Where(u => u.UserId == currentUserId);
-            return View(currentUserNotes as List<Note>);
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            var currentUserNotes = _context.Notes.Where(n => n.User == currentUser);
+            return View(currentUserNotes);
         }
 
         [HttpPost]
-        public IActionResult AddNote(Note note)
+        public async Task<IActionResult> AddNote(Note note)
         {
-            if (note!=null)
+            if (note != null)
             {
-                var currentUserId = _userManager.GetUserId(HttpContext.User);
-                note.UserId = currentUserId;
+                var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+                note.User = currentUser;
                 _context.Notes.Add(note);
                 _context.SaveChanges();
                 return View("Index");

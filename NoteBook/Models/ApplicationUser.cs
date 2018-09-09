@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 
 namespace NoteBook.Models
@@ -10,10 +7,5 @@ namespace NoteBook.Models
     public class ApplicationUser : IdentityUser
     {
         public List<Note> Notes { get; set; }
-
-        public ApplicationUser()
-        {
-            Notes = new List<Note>();
-        }
     }
 }

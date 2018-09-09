@@ -1,10 +1,10 @@
 ﻿@using NoteBook.Helpers
-@model List<Note>
+@model IEnumerable<Note>
 @{ViewData["Title"] = "Home Page";}
 
-@Html.ShowNotes(Model);
+@Html.ShowNotes(Model)
 
 <button class="btn btn-lg btn-add center-block" data-toggle="modal" data-target="#AddNoteModal">+</button>
 
 @{await Html.RenderPartialAsync("_EditNote");}
-@{await Html.RenderPartialAsync("_AddNote");}
+@{await Html.RenderPartialAsync("_AddNote");}@
