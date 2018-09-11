@@ -1,12 +1,4 @@
-﻿var textarea = document.getElementById("textarea");
-var limit = 800; //height limit
+﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+// for details on configuring this project to bundle and minify static web assets.
 
-textarea.oninput = function () {
-    textarea.style.height = "";
-    textarea.style.height = Math.min(textarea.scrollHeight, limit) + "px";
-};
-
-//init color picker
-$(document).ready(function () {
-    $('#colorpicker').farbtastic('#color');
-});
+// Write your JavaScript code.

@@ -1,4 +1,6 @@
-﻿body {
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -32,62 +34,4 @@
     .carousel-caption {
         display: none;
     }
-}
-
-.Nothing {
-    text-align: center;
-}
-
-.btn {
-    transition: 1s;
-    border-radius: 100px;
-}
-
-.btn:hover {
-    background-color: deepskyblue;
-    border-radius: 10px;
-}
-
-.btn:focus, .btn:active:focus {
-    outline: none;
-}
-
-.btn-add {
-    padding: 30px 120px;
-    font-size: 40px;
-}
-
-.note {
-    margin-top: 20px;
-    padding: 4px 5px;
-    border: solid 2px deepskyblue;
-    border-radius: 10px;
-    transition: 1s;
-}
-
-.note:hover {
-    background-color: deepskyblue;
-    border-radius: 10px;
-}
-
-.note:focus, .note:active:focus {
-    outline: none;
-}
-
-.option {
-    margin-left: 3px;
-    margin-top: 20px;
-    font-size: 20px;
-    font-style: normal;
-}
-
-textarea {
-    width: 100%;
-    overflow: hidden;
-    resize: none;
-}
-
-.modal-body {
-    min-height: calc(80vh - 200px);
-    overflow-y: auto;
 }
