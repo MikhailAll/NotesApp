@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Add Note"; 
+}
+
+<div class="col-lg-9">
+    <h1>Create your note</h1>
+    <div class="note-constructor">
+        <div class="form-group row">
+            <label for="headerInput" class="col-sm-2 col-form-label">Header:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="headerInput" placeholder="Header" />
+            </div>
+        </div>
+        <div class="form-group">
+            <ul class="nav nav-tabs" id="constructorTabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="constructorTab" data-toggle="tab" role="tab" aria-controls="constructor" aria-selected="True" href="#constructor">Constructor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="previewTab" data-toggle="tab" role="tab" aria-controls="preview" aria-selected="False" href="#preview">Preview</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="constructorTabs">
+                <div class="tab-pane fade show active" id="constructor" role="tabpanel" aria-labelledby="constructorTab">
+                    <button class="btn btn-light"><span class="oi oi-header"></span></button>
+                    <textarea class="form-control" rows="25"></textarea>
+                </div>
+                <div class="tab-pane fade " id="preview" role="tabpanel" aria-lavelledby="previewTab">
+                    preview
+                </div>
+            </div>
+        </div>
+
+        <label>Add few tags:</label>
+        <input type="text" class="form-control" />
+    </div>
+</div>
