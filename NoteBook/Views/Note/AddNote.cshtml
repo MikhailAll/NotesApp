@@ -1,14 +1,17 @@
 ﻿@{
+
     ViewData["Title"] = "Add Note"; 
 }
 
+@model Note;
+
 <div class="col-lg-9">
     <h1>Create your note</h1>
-    <div class="note-constructor">
+    <form class="note-constructor" method="post" asp-controller="Note" asp-action="AddNote">
         <div class="form-group row">
-            <label for="headerInput" class="col-sm-2 col-form-label">Header:</label>
+            <label for="titleInput" class="col-sm-2 col-form-label">Title:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="headerInput" placeholder="Header" />
+                <input type="text" class="form-control" id="titleInput" placeholder="Title" asp-for="Title" />
             </div>
         </div>
         <div class="form-group">
@@ -17,21 +20,58 @@
                     <a class="nav-link active" id="constructorTab" data-toggle="tab" role="tab" aria-controls="constructor" aria-selected="True" href="#constructor">Constructor</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="previewTab" data-toggle="tab" role="tab" aria-controls="preview" aria-selected="False" href="#preview">Preview</a>
+                    <a class="nav-link" id="previewTab" data-toggle="tab" role="tab" aria-controls="preview" aria-selected="False" href="#preview" onclick="renderPreview()">Preview</a>
                 </li>
             </ul>
-            <div class="tab-content" id="constructorTabs">
+            <div class="tab-content" id="constructorTabs">               
                 <div class="tab-pane fade show active" id="constructor" role="tabpanel" aria-labelledby="constructorTab">
-                    <button class="btn btn-light"><span class="oi oi-header"></span></button>
-                    <textarea class="form-control" rows="25"></textarea>
+                    <div class="toolbar">
+                        <div class="dropdown">
+                            <button class="btn btn-light dropdown-toggle" type="button" id="headerDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="oi oi-header"></span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="headerDropdown">
+                                <button class="btn btn-light dropdown-item" id="lg-headerBtn"><span class="oi oi-header lg-header"></span></button>
+                                <button class="btn btn-light dropdown-item" id="md-headerBtn"><span class="oi oi-header md-header"></span></button>
+                                <button class="btn btn-light dropdown-item" id="sm-headerBtn"><span class="oi oi-header sm-header"></span></button>
+                            </div>
+                        </div>
+                        <button class="btn btn-light" id="boldBtn">
+                            <span class="oi oi-bold"></span>
+                        </button>
+                        <button class="btn btn-light" id="italicBtn">
+                            <span class="oi oi-italic"></span>
+                        </button>
+                        <button class="btn btn-light" id="underlineBtn">
+                            <span class="oi oi-underline"></span>
+                        </button>
+                        <button class="btn btn-light" id="spreadsheetBtn">
+                            <span class="oi oi-spreadsheet"></span>
+                        </button>
+                        <button class="btn btn-light" id="quoteBtn">
+                            <span class="oi oi-double-quote-serif-right"></span>
+                        </button>
+                        <button class="btn btn-light" id="linkBtn">
+                            <span class="oi oi-link-intact"></span>
+                        </button>
+                        <button class="btn btn-light" id="listBtn">
+                            <span class="oi oi-list"></span>
+                        </button>
+                        <button class="btn btn-light" id="imageBtn">
+                            <span class="oi oi-image"></span>
+                        </button>
+                    </div>
+                    <textarea class="form-control" rows="25" id="constructorTextarea" asp-for="Text"></textarea>
                 </div>
-                <div class="tab-pane fade " id="preview" role="tabpanel" aria-lavelledby="previewTab">
-                    preview
+                <div class="tab-pane fade" id="preview" role="tabpanel" aria-lavelledby="previewTab">
+                    <div class="preview" id="previewArea"></div>
                 </div>
             </div>
         </div>
 
         <label>Add few tags:</label>
-        <input type="text" class="form-control" />
-    </div>
+        @*<input type="text" class="form-control" />*@
+        
+        <input type="submit" class="btn btn-light" value="Submit"/>
+    </form>
 </div>

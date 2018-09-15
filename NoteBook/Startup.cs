@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using NoteBook.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NoteBook.Models;
+using NoteBook.Services.Interfaces;
 
 namespace NoteBook
 {
@@ -37,10 +39,12 @@ namespace NoteBook
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDefaultIdentity<User>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddTransient<INoteServices, INoteServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

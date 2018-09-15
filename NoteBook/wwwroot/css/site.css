@@ -41,6 +41,40 @@ body {
     padding-left: 35px;
 }
 
+.toolbar {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 textarea {
     width: 100%;
+}
+
+.dropdown-menu {
+    min-width: 0px;
+}
+
+.oi.oi-header.lg-header {
+    font-size: 20px;
+}
+
+.oi.oi-header.md-header {
+    font-size: 16px;
+}
+
+.oi.oi-header.sm-header {
+    font-size: 12px;
+}
+
+#constructor .dropdown {
+    display: inline-block;
+}
+
+.preview {
+    margin-top: 45px;
+    margin-bottom: 45px;
+    padding: 12px 6px;
+    min-height: 600px;
+    border: #ced4da solid 1px;
+    border-radius: 0.25rem;
 }
