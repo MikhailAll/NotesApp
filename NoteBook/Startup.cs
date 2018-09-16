@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NoteBook.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NoteBook.Models;
-using NoteBook.Services.Interfaces;
+using NoteBook.Services;
+using NoteBook.Interfaces;
 
 namespace NoteBook
 {
@@ -44,7 +39,7 @@ namespace NoteBook
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddTransient<INoteServices, INoteServices>();
+            services.AddTransient<INoteRepository, NoteServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,7 +10,7 @@ using NoteBook.Data;
 namespace NoteBook.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180915155016_Initial")]
+    [Migration("20180916141441_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -145,7 +145,7 @@ namespace NoteBook.Migrations
 
                     b.Property<int?>("InReplyToId");
 
-                    b.Property<int?>("NoteId");
+                    b.Property<int>("NoteId");
 
                     b.Property<string>("Text");
 
@@ -181,6 +181,54 @@ namespace NoteBook.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Notes");
+                });
+
+            modelBuilder.Entity("NoteBook.Models.Rating", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CommentId");
+
+                    b.Property<int?>("NoteId");
+
+                    b.Property<bool?>("Rate");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommentId");
+
+                    b.HasIndex("NoteId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Ratings");
+                });
+
+            modelBuilder.Entity("NoteBook.Models.UploadedImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CommentId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int?>("NoteId");
+
+                    b.Property<string>("Path");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommentId");
+
+                    b.HasIndex("NoteId");
+
+                    b.ToTable("UploadedImages");
                 });
 
             modelBuilder.Entity("NoteBook.Models.User", b =>
@@ -287,10 +335,11 @@ namespace NoteBook.Migrations
 
                     b.HasOne("NoteBook.Models.Note", "Note")
                         .WithMany("Comments")
-                        .HasForeignKey("NoteId");
+                        .HasForeignKey("NoteId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("NoteBook.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("UserId");
                 });
 
@@ -299,6 +348,34 @@ namespace NoteBook.Migrations
                     b.HasOne("NoteBook.Models.User", "User")
                         .WithMany("Notes")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("NoteBook.Models.Rating", b =>
+                {
+                    b.HasOne("NoteBook.Models.Comment", "Comment")
+                        .WithMany("Ratings")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("NoteBook.Models.Note", "Note")
+                        .WithMany("Ratings")
+                        .HasForeignKey("NoteId");
+
+                    b.HasOne("NoteBook.Models.User", "User")
+                        .WithMany("Ratings")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("NoteBook.Models.UploadedImage", b =>
+                {
+                    b.HasOne("NoteBook.Models.Comment", "Comment")
+                        .WithMany("UploadedImages")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("NoteBook.Models.Note", "Note")
+                        .WithMany("UploadedImages")
+                        .HasForeignKey("NoteId");
                 });
 #pragma warning restore 612, 618
         }

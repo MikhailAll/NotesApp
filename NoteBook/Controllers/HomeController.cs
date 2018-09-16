@@ -4,15 +4,27 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using NoteBook.Data;
 using NoteBook.Models;
+using NoteBook.Interfaces;
 
 namespace NoteBook.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly ApplicationDbContext _context;
+        private readonly INoteRepository _noteServices;
+
+        public HomeController(ApplicationDbContext context, INoteRepository noteServices)
         {
-            return View();
+            _context = context;
+            _noteServices = noteServices;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var notes = await _noteServices.Get();
+            return View(notes);
         }
 
         public IActionResult About()

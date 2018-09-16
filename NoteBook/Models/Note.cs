@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Html;
 
 namespace NoteBook.Models
 {
@@ -13,13 +10,19 @@ namespace NoteBook.Models
         public string Text { get; set; }
         public DateTime Date { get; set; }
 
+        public string UserId { get; set; }
         public User User { get; set; }
+
         public List<Comment> Comments { get; set; }
+        public List<Stats> Ratings { get; set; }
+        public List<UploadedImage> Attachments { get; set; }
 
         public Note()
         {
             Date = DateTime.Now;
             Comments = new List<Comment>();
+            Ratings = new List<Stats>();
+            Attachments = new List<UploadedImage>();
         }
     }
 }

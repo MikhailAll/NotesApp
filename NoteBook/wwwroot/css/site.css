@@ -14,6 +14,7 @@ body {
 
 .publication {
     margin-top: 35px;
+    word-wrap: break-word;
 }
 
 .publication-content {
@@ -77,4 +78,5 @@ textarea {
     min-height: 600px;
     border: #ced4da solid 1px;
     border-radius: 0.25rem;
+    word-wrap: break-word;
 }

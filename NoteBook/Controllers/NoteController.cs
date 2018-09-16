@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NoteBook.Data;
 using NoteBook.Models;
-using NoteBook.Services.Interfaces;
+using NoteBook.Interfaces;
 
 namespace NoteBook.Controllers
 {
@@ -16,9 +16,9 @@ namespace NoteBook.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<User> _userManager;
-        private readonly INoteServices _noteServices;
+        private readonly INoteRepository _noteServices;
 
-        public NoteController(ApplicationDbContext context, UserManager<User> userManager, INoteServices noteServices)
+        public NoteController(ApplicationDbContext context, UserManager<User> userManager, INoteRepository noteServices)
         {
             _context = context;
             _userManager = userManager;
