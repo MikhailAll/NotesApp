@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NoteBook.Data;
+using NotesApp.Data;
 
-namespace NoteBook.Migrations
+namespace NotesApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -15,7 +15,7 @@ namespace NoteBook.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -133,36 +133,9 @@ namespace NoteBook.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("NoteBook.Models.Comment", b =>
+            modelBuilder.Entity("NotesApp.Models.Note", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<int?>("InReplyToId");
-
-                    b.Property<int>("NoteId");
-
-                    b.Property<string>("Text");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("InReplyToId");
-
-                    b.HasIndex("NoteId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("NoteBook.Models.Note", b =>
-                {
-                    b.Property<int>("Id")
+                    b.Property<int>("NoteId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -174,84 +147,14 @@ namespace NoteBook.Migrations
 
                     b.Property<string>("UserId");
 
-                    b.HasKey("Id");
+                    b.HasKey("NoteId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Notes");
                 });
 
-            modelBuilder.Entity("NoteBook.Models.Rating", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("StatsId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StatsId")
-                        .IsUnique();
-
-                    b.ToTable("Rating");
-                });
-
-            modelBuilder.Entity("NoteBook.Models.Stats", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CommentId");
-
-                    b.Property<int?>("NoteId");
-
-                    b.Property<bool?>("Rate");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CommentId");
-
-                    b.HasIndex("NoteId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Ratings");
-                });
-
-            modelBuilder.Entity("NoteBook.Models.UploadedImage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CommentId");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("NoteId");
-
-                    b.Property<string>("Path");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CommentId");
-
-                    b.HasIndex("NoteId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
-
-                    b.ToTable("UploadedImages");
-                });
-
-            modelBuilder.Entity("NoteBook.Models.User", b =>
+            modelBuilder.Entity("NotesApp.Models.User", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -312,7 +215,7 @@ namespace NoteBook.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("NoteBook.Models.User")
+                    b.HasOne("NotesApp.Models.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -320,7 +223,7 @@ namespace NoteBook.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("NoteBook.Models.User")
+                    b.HasOne("NotesApp.Models.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -333,7 +236,7 @@ namespace NoteBook.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("NoteBook.Models.User")
+                    b.HasOne("NotesApp.Models.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -341,74 +244,17 @@ namespace NoteBook.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("NoteBook.Models.User")
+                    b.HasOne("NotesApp.Models.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("NoteBook.Models.Comment", b =>
+            modelBuilder.Entity("NotesApp.Models.Note", b =>
                 {
-                    b.HasOne("NoteBook.Models.Comment", "InReplyTo")
-                        .WithMany()
-                        .HasForeignKey("InReplyToId");
-
-                    b.HasOne("NoteBook.Models.Note", "Note")
-                        .WithMany("Comments")
-                        .HasForeignKey("NoteId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("NoteBook.Models.User", "User")
-                        .WithMany("Comments")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("NoteBook.Models.Note", b =>
-                {
-                    b.HasOne("NoteBook.Models.User", "User")
+                    b.HasOne("NotesApp.Models.User", "User")
                         .WithMany("Notes")
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("NoteBook.Models.Rating", b =>
-                {
-                    b.HasOne("NoteBook.Models.Stats", "Stats")
-                        .WithOne("Rating")
-                        .HasForeignKey("NoteBook.Models.Rating", "StatsId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("NoteBook.Models.Stats", b =>
-                {
-                    b.HasOne("NoteBook.Models.Comment", "Comment")
-                        .WithMany("Ratings")
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("NoteBook.Models.Note", "Note")
-                        .WithMany("Ratings")
-                        .HasForeignKey("NoteId");
-
-                    b.HasOne("NoteBook.Models.User", "User")
-                        .WithMany("Ratings")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("NoteBook.Models.UploadedImage", b =>
-                {
-                    b.HasOne("NoteBook.Models.Comment", "Comment")
-                        .WithMany("Attachments")
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("NoteBook.Models.Note", "Note")
-                        .WithMany("Attachments")
-                        .HasForeignKey("NoteId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("NoteBook.Models.User", "User")
-                        .WithOne("Avatar")
-                        .HasForeignKey("NoteBook.Models.UploadedImage", "UserId");
                 });
 #pragma warning restore 612, 618
         }

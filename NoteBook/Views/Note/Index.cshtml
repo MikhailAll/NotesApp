@@ -1,0 +1,42 @@
+﻿@model NotesApp.Models.ViewModels.IndexNotesViewModel;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-lg-3">
+        <div class="sidebar">
+            @{
+                foreach (var note in Model.Notes)
+                {
+                    <a class="note-ref">@note.Title</a>
+                }
+            }
+        </div>
+    </div>
+    <div class="col-lg-9">
+        @{
+            foreach (var note in Model.Notes)
+            {
+                <div class="note">
+                    <div class="note-date">@note.Date</div>
+
+                    <h1>@note.Title</h1>
+                    <div class="note-content">
+                        @note.Text
+                    </div>
+
+                    <form method="get" asp-controller="Note" asp-action="Update">
+                        <input type="hidden" asp-for="NoteId" value="@note.NoteId"/>
+                        <input type="submit" class="btn btn-info form-control" value="Update"/>
+                    </form>
+                    <form method="post" asp-controller="Note" asp-action="Delete">
+                        <input type="hidden" asp-for="NoteId" value="@note.NoteId"/>
+                        <input type="submit" class="btn btn-danger form-control" value="Delete"/>
+                    </form>
+                </div>
+            }
+        }
+    </div>
+</div>
+

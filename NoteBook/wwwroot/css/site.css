@@ -1,82 +1,22 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
-for details on configuring this project to bundle and minify static web assets. */
-body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-
-/* Wrapping element */
+﻿/* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
+
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
 
-.publication {
-    margin-top: 35px;
-    word-wrap: break-word;
+.note {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
-.publication-content {
-    margin-bottom: 15px;
+.note-content {
+    padding-top: 5px;
+    padding-bottom: 3px;
 }
 
-.publication-tags {
-    margin-bottom: 30px;
-}
-
-.publication-footer {
-    margin-top: 15px; 
-}
-
-.publication-footer ul{
-    display: inline-flex;
-    list-style: none;
-    border: 1px silver dotted;
-    align-items: center;
-    padding: 5px 10px;
-    margin: 0px;
-}
-
-.stats-item {
-    padding-left: 35px;
-}
-
-.toolbar {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-textarea {
-    width: 100%;
-}
-
-.dropdown-menu {
-    min-width: 0px;
-}
-
-.oi.oi-header.lg-header {
-    font-size: 20px;
-}
-
-.oi.oi-header.md-header {
-    font-size: 16px;
-}
-
-.oi.oi-header.sm-header {
-    font-size: 12px;
-}
-
-#constructor .dropdown {
-    display: inline-block;
-}
-
-.preview {
-    margin-top: 45px;
-    margin-bottom: 45px;
-    padding: 12px 6px;
-    min-height: 600px;
-    border: #ced4da solid 1px;
-    border-radius: 0.25rem;
-    word-wrap: break-word;
+.note-content[contenteditable = true] {
+    border: 2px aqua double;
+    background-color: aqua;
 }

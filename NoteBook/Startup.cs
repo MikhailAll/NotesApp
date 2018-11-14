@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NoteBook.Data;
+using NotesApp.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NoteBook.Models;
-using NoteBook.Services;
-using NoteBook.Interfaces;
+using NotesApp.Models;
+using NotesApp.Services;
+using NotesApp.Interfaces;
 
-namespace NoteBook
+namespace NotesApp
 {
     public class Startup
     {
@@ -39,7 +39,7 @@ namespace NoteBook
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddTransient<INoteRepository, NoteServices>();
+            services.AddTransient<INoteService, NoteService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,7 +66,7 @@ namespace NoteBook
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Note}/{action=Index}");
             });
         }
     }

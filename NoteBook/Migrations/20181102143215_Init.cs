@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace NoteBook.Migrations
+namespace NotesApp.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,21 +26,22 @@ namespace NoteBook.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
                     Id = table.Column<string>(nullable: false),
                     UserName = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
                     PasswordHash = table.Column<string>(nullable: true),
                     SecurityStamp = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true)
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    Avatar = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -211,63 +212,56 @@ namespace NoteBook.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ratings",
+                name: "Tags",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Rate = table.Column<bool>(nullable: true),
-                    UserId = table.Column<string>(nullable: true),
-                    NoteId = table.Column<int>(nullable: true),
-                    CommentId = table.Column<int>(nullable: false)
+                    TagName = table.Column<string>(nullable: true),
+                    NoteId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ratings", x => x.Id);
+                    table.PrimaryKey("PK_Tags", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Ratings_Comments_CommentId",
-                        column: x => x.CommentId,
-                        principalTable: "Comments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Ratings_Notes_NoteId",
+                        name: "FK_Tags_Notes_NoteId",
                         column: x => x.NoteId,
                         principalTable: "Notes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Ratings_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UploadedImages",
+                name: "Rates",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    Path = table.Column<string>(nullable: true),
-                    NoteId = table.Column<int>(nullable: true),
-                    CommentId = table.Column<int>(nullable: false)
+                    Like = table.Column<bool>(nullable: true),
+                    UserId = table.Column<int>(nullable: false),
+                    UserId1 = table.Column<string>(nullable: true),
+                    CommentId = table.Column<int>(nullable: false),
+                    NoteId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UploadedImages", x => x.Id);
+                    table.PrimaryKey("PK_Rates", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UploadedImages_Comments_CommentId",
+                        name: "FK_Rates_Comments_CommentId",
                         column: x => x.CommentId,
                         principalTable: "Comments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UploadedImages_Notes_NoteId",
+                        name: "FK_Rates_Notes_NoteId",
                         column: x => x.NoteId,
                         principalTable: "Notes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Rates_AspNetUsers_UserId1",
+                        column: x => x.UserId1,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -332,28 +326,23 @@ namespace NoteBook.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ratings_CommentId",
-                table: "Ratings",
+                name: "IX_Rates_CommentId",
+                table: "Rates",
                 column: "CommentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ratings_NoteId",
-                table: "Ratings",
+                name: "IX_Rates_NoteId",
+                table: "Rates",
                 column: "NoteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ratings_UserId",
-                table: "Ratings",
-                column: "UserId");
+                name: "IX_Rates_UserId1",
+                table: "Rates",
+                column: "UserId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UploadedImages_CommentId",
-                table: "UploadedImages",
-                column: "CommentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UploadedImages_NoteId",
-                table: "UploadedImages",
+                name: "IX_Tags_NoteId",
+                table: "Tags",
                 column: "NoteId");
         }
 
@@ -375,10 +364,10 @@ namespace NoteBook.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Ratings");
+                name: "Rates");
 
             migrationBuilder.DropTable(
-                name: "UploadedImages");
+                name: "Tags");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
